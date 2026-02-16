@@ -13,15 +13,13 @@ WORKDIR /src
 # Copy solution file
 COPY ["../RentalSystem.sln", "./"]
 
-# Copy project files
-COPY ["RentalSystem.API.csproj", "./"]
-COPY ["../RentalSystem.Application/RentalSystem.Application.csproj", "../RentalSystem.Application/"]
-COPY ["../RentalSystem.Domain/RentalSystem.Domain.csproj", "../RentalSystem.Domain/"]
-COPY ["../RentalSystem.Infrastructure/RentalSystem.Infrastructure.csproj", "../RentalSystem.Infrastructure/"]
+COPY ["RentalSystem.API/RentalSystem.API.csproj", "RentalSystem.API/"]
+COPY ["RentalSystem.Application/RentalSystem.Application.csproj", "RentalSystem.Application/"]
+COPY ["RentalSystem.Domain/RentalSystem.Domain.csproj", "RentalSystem.Domain/"]
+COPY ["RentalSystem.Infrastructure/RentalSystem.Infrastructure.csproj", "RentalSystem.Infrastructure/"]
 
-# Restore dependencies
-RUN dotnet restore "./RentalSystem.API.csproj"
-
+# Restore dependencies for API
+RUN dotnet restore "RentalSystem.API/RentalSystem.API.csproj"
 # Copy all source files
 COPY . . 
 COPY ../RentalSystem.Application ../RentalSystem.Application
