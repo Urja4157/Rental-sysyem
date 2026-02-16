@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RentalSystem.Infrastructure;
 using RentalSystem.Infrastructure.Repositories;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +23,13 @@ if (app.Environment.IsDevelopment())
 }
 app.UseSwagger();
 app.UseSwaggerUI();
+app.MapScalarApiReference();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://*:{port}");
 
 app.MapControllers();
 
